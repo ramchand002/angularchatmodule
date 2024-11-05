@@ -1,0 +1,6 @@
+.custom-ul-alignment {
+    width: 100%;
+    overflow: scroll;
+    max-height: 400px;
+    overflow-x: hidden;
+}

@@ -1,0 +1,35 @@
+<div class="selected-user">
+    <span>To: <span class="name">{{username}}</span></span>
+</div>
+<div class="chat-container set_max_height" #scrollMe>
+    <ul class="chat-box chatContainerScroll">
+        <li [ngClass]="{'chat-left': item.user_id == id, 'chat-right': item.user_id !== id}" *ngFor="let item of socketService._chatMessage">
+            <div class="chat-avatar">
+                <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                <div class="chat-name">{{item.user_id == id ? _myUserName : username}}</div>
+            </div>
+            <div class="chat-text">
+                {{item?.message}}
+            </div>
+            <div class="chat-hour">{{item?.update_at | date:'h:mm a'}} <span class="fa fa-check-circle"></span></div>
+        </li>
+    </ul>
+    <div class="form-group mt-3 mb-0">
+        <input [(ngModel)]="messageText" type="text" class="form-control" (keyup.enter)="sendMessage()" placeholder="Type your message here...">
+    </div>
+    <button type="button" (click)="fileInput.click()">File select</button>
+    <div *ngIf="_filesArray && _filesArray.length > 0">
+        <div class="row">
+            <div class="col-sm-4" *ngFor="let image of _filesArray">
+                <!-- <img src="{{_bindThumbnail(image)}}"> -->
+                <img [attr.src]="_bindThumbnail(image) | thumbnail | async">
+            </div>
+        </div>
+    </div>
+</div>
+
+    <input type='file' style="display: none;" #fileInput multiple  accept="image/*;capture=camera" id="cameraInput" name="cameraInput"
+    (change)="onFileSelected($event)" />
+<!-- new work start here-->
+
+
